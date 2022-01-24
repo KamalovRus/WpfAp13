@@ -1,0 +1,70 @@
+﻿<Window x:Class="WpfApp9.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp9"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Style="{DynamicResource WindowStyle}">
+    <Window.CommandBindings>
+        <CommandBinding Command="Close" Executed="MenuItem_Click_2"/>
+        <CommandBinding Command="Open" Executed="MenuItem_Click"/>
+        <CommandBinding Command="Save" Executed="MenuItem_Click_1"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Margin="2" Padding="2">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="Open"/>
+                <MenuItem Header="Сохранить" Command="Save"/>
+                <Separator/>
+                <MenuItem Header="Закрыть" Command="ApplicationCommands.Close"/>
+            </MenuItem>
+            <MenuItem Header="Тема">
+                <MenuItem  Header="Светлая тема" Click="LightThemeSwitch"/>
+                <MenuItem Header="Темная тема" Click="DarkThemeSwitch"/>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Grid.Row="1" Style="{DynamicResource ToolBarTrayStyle}">
+            <ToolBar Style="{DynamicResource ToolBarStyle}" Margin="5" Padding="5">
+                <ComboBox Style="{DynamicResource ComboBoxStyle}" Name="FontBox" SelectedIndex="0" Width="200" SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBoxItem  Content="Arial" Tag="Arial"/>
+                    <ComboBoxItem Content="Times New Roman" Tag="TimesNewRoman"/>
+                    <ComboBoxItem Content="Verdana" Tag="Verdana"/>
+                </ComboBox>
+                <ComboBox Style="{DynamicResource ComboBoxStyle}" Name="SizeBox" SelectedIndex="1" Width="50" SelectionChanged="ComboBox_SelectionChanged_1">
+                    <ComboBoxItem Content="12" Tag="12"/>
+                    <ComboBoxItem Content="14" Tag="14"/>
+                    <ComboBoxItem Content="16" Tag="16"/>
+                </ComboBox>
+            </ToolBar>
+            <ToolBar Style="{DynamicResource ToolBarStyle}" Margin="5" Padding="5">
+                <Button x:Name="Bald" Click="Bald_Click">
+                    <Image Source="Icons/bold.png" Height="30"/>
+                </Button>
+                <Separator/>
+                <Button x:Name="Italic" Click="Italic_Click" >
+                    <Image Source="Icons/italic.png" Height="30"/>
+                </Button>
+                <Separator/>
+                <Button x:Name="Underline" Click="Underline_Click">
+                    <Image Source="Icons/underline.jpg" Height="30"/>
+                </Button>
+                <Separator/>
+            </ToolBar>
+            <ToolBar Style="{DynamicResource ToolBarStyle}" Margin="5" Padding="5">
+                <StackPanel VerticalAlignment="Center">
+                    <RadioButton Style="{DynamicResource RadioButtonStyle}" x:Name="Black_Button" Content="Черный" IsChecked="True" Checked="Black_Button_Checked"  />
+                    <RadioButton Style="{DynamicResource RadioButtonStyle}" x:Name="Red_Button" Content="Красный" Checked="Red_Button_Checked" />
+                </StackPanel>
+            </ToolBar>
+        </ToolBarTray>
+        <TextBox Style="{DynamicResource TextBoxStyle}" x:Name="TextWindow"  Grid.Row="2" Margin="5" Padding="5" FontSize="{Binding ElementName=SizeBox, Path=SelectedItem.Tag}" FontFamily="{Binding ElementName=FontBox, Path=SelectedItem.Tag}" TextWrapping="Wrap">
+
+        </TextBox>
+    </Grid>
+</Window>
